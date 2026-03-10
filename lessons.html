@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn to Sing with Omega Bone — Free Vocal Lessons</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Serif+Text:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--espresso:#1a0f0a;--dark-brown:#2c1a10;--sienna:#8b4513;--burnt:#c1622a;--gold:#c9973a;--gold-light:#e8c06a;--cream:#f5edd8;--warm-white:#faf6ee;--muted:#9e8872;--text-dark:#1a0f0a;}
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--warm-white);color:var(--text-dark);font-family:'Jost',sans-serif;overflow-x:hidden;cursor:none;}
+  .cursor{position:fixed;width:12px;height:12px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:multiply;}
+  .cursor-ring{position:fixed;width:40px;height:40px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:0.6;}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9990;opacity:0.4;}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 56px;display:flex;align-items:center;justify-content:space-between;background:rgba(26,15,10,0.95);backdrop-filter:blur(12px);}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--cream);letter-spacing:0.04em;text-decoration:none;}
+  .nav-logo span{color:var(--gold);font-style:italic;}
+  .nav-links{display:flex;gap:40px;align-items:center;list-style:none;}
+  .nav-links a{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,237,216,0.7);text-decoration:none;transition:color 0.3s;}
+  .nav-links a:hover,.nav-links a.active{color:var(--gold-light);}
+  .nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold)!important;padding:10px 24px;transition:background 0.3s,color 0.3s!important;}
+  .nav-cta:hover{background:var(--gold)!important;color:var(--espresso)!important;}
+
+  /* HERO - warm cream tone for learning audience */
+  .page-hero{min-height:70vh;background:var(--sienna);position:relative;display:grid;grid-template-columns:1.1fr 0.9fr;align-items:center;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 10% 60%,rgba(26,15,10,0.4) 0%,transparent 65%),radial-gradient(ellipse 50% 60% at 90% 20%,rgba(255,200,100,0.1) 0%,transparent 60%);}
+  .hero-deco-num{position:absolute;right:4vw;bottom:-30px;font-family:'Playfair Display',serif;font-size:260px;font-weight:900;color:rgba(255,255,255,0.04);line-height:1;pointer-events:none;}
+  .hero-content{position:relative;z-index:2;padding:140px 64px 100px 10vw;}
+  .page-eyebrow{font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-light);margin-bottom:24px;font-family:'Jost',sans-serif;display:flex;align-items:center;gap:14px;}
+  .page-eyebrow::before{content:'';display:block;width:40px;height:1px;background:var(--gold-light);opacity:0.7;}
+  .page-title{font-family:'Playfair Display',serif;font-size:clamp(44px,5.5vw,80px);font-weight:900;line-height:0.95;color:var(--cream);}
+  .page-title em{font-style:italic;color:var(--gold-light);display:block;}
+  .page-subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.8vw,22px);font-style:italic;font-weight:300;color:rgba(245,237,216,0.7);margin-top:24px;max-width:480px;line-height:1.7;}
+  .hero-ctas{display:flex;gap:14px;margin-top:40px;flex-wrap:wrap;}
+
+  .btn-cream{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;padding:18px 44px;background:var(--cream);color:var(--espresso);border:none;cursor:none;text-decoration:none;display:inline-block;transition:background 0.3s;}
+  .btn-cream:hover{background:var(--warm-white);}
+  .btn-ghost-cream{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:400;padding:18px 44px;background:transparent;color:var(--cream);border:1px solid rgba(245,237,216,0.3);cursor:none;text-decoration:none;display:inline-block;transition:border-color 0.3s;}
+  .btn-ghost-cream:hover{border-color:var(--cream);}
+
+  /* Hero right - visual stat display */
+  .hero-right{position:relative;z-index:2;padding:140px 10vw 100px 20px;display:flex;flex-direction:column;gap:20px;}
+  .hero-stat-card{background:rgba(26,15,10,0.35);border:1px solid rgba(245,237,216,0.1);padding:32px 36px;backdrop-filter:blur(8px);}
+  .hsc-num{font-family:'Playfair Display',serif;font-size:52px;font-weight:900;color:var(--gold-light);line-height:1;}
+  .hsc-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,237,216,0.55);font-family:'Jost',sans-serif;margin-top:6px;}
+  .hsc-desc{font-family:'DM Serif Text',serif;font-size:13px;color:rgba(245,237,216,0.4);margin-top:8px;line-height:1.5;font-style:italic;}
+
+  /* PHILOSOPHY */
+  .philosophy{background:var(--cream);padding:100px 10vw;}
+  .philosophy-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .philosophy-text{}
+  .section-eyebrow{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);font-family:'Jost',sans-serif;font-weight:500;margin-bottom:16px;}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,44px);font-weight:700;color:var(--espresso);line-height:1.15;margin-bottom:28px;}
+  .section-title em{font-style:italic;color:var(--sienna);}
+  .phil-body{font-family:'DM Serif Text',serif;font-size:17px;line-height:1.85;color:rgba(26,15,10,0.65);margin-bottom:20px;}
+  .phil-principles{margin-top:40px;display:flex;flex-direction:column;gap:1px;}
+  .principle{display:grid;grid-template-columns:48px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid rgba(26,15,10,0.07);}
+  .principle:first-child{border-top:1px solid rgba(26,15,10,0.07);}
+  .p-icon{font-size:22px;padding-top:3px;}
+  .p-title{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--espresso);margin-bottom:5px;}
+  .p-desc{font-family:'DM Serif Text',serif;font-size:14px;line-height:1.6;color:rgba(26,15,10,0.55);}
+
+  /* Warmup visual */
+  .warmup-visual{background:var(--espresso);padding:48px;position:relative;overflow:hidden;}
+  .warmup-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(193,98,42,0.25) 0%,transparent 70%);}
+  .wv-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-family:'Jost',sans-serif;margin-bottom:24px;position:relative;z-index:1;}
+  .wv-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--cream);margin-bottom:12px;position:relative;z-index:1;}
+  .wv-sub{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:rgba(245,237,216,0.5);margin-bottom:32px;position:relative;z-index:1;}
+  .wv-steps{display:flex;flex-direction:column;gap:12px;position:relative;z-index:1;}
+  .wv-step{display:flex;align-items:center;gap:16px;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(201,151,58,0.1);}
+  .wv-step-num{font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:var(--gold);min-width:24px;}
+  .wv-step-text{font-size:13px;color:rgba(245,237,216,0.65);font-family:'Jost',sans-serif;font-weight:300;}
+  .wv-time{font-family:'Playfair Display',serif;font-size:56px;font-weight:900;color:var(--gold);opacity:0.15;position:absolute;bottom:20px;right:32px;line-height:1;}
+
+  /* CURRICULUM */
+  .curriculum{background:var(--dark-brown);padding:100px 10vw;}
+  .curr-header{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;margin-bottom:60px;}
+  .curr-title{font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,44px);font-weight:700;color:var(--cream);line-height:1.15;}
+  .curr-title em{font-style:italic;color:var(--gold);}
+  .curr-filter{display:flex;gap:2px;}
+  .filter-btn{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;padding:10px 20px;background:rgba(255,255,255,0.04);border:1px solid rgba(201,151,58,0.1);color:rgba(245,237,216,0.45);cursor:none;font-family:'Jost',sans-serif;transition:background 0.3s,color 0.3s,border-color 0.3s;}
+  .filter-btn.active,.filter-btn:hover{background:var(--gold);color:var(--espresso);border-color:var(--gold);}
+  .lessons-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+  .lesson-card{background:rgba(255,255,255,0.03);border:1px solid rgba(201,151,58,0.06);padding:44px 36px;transition:background 0.4s,border-color 0.4s;cursor:none;position:relative;overflow:hidden;}
+  .lesson-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--gold),var(--burnt));transform:scaleX(0);transform-origin:left;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);}
+  .lesson-card:hover{background:rgba(255,255,255,0.06);border-color:rgba(201,151,58,0.18);}
+  .lesson-card:hover::before{transform:scaleX(1);}
+  .lesson-level{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);font-family:'Jost',sans-serif;margin-bottom:20px;padding:5px 12px;border:1px solid rgba(201,151,58,0.2);display:inline-block;}
+  .lesson-level.intermediate{color:var(--burnt);border-color:rgba(193,98,42,0.3);}
+  .lesson-level.advanced{color:var(--cream);border-color:rgba(245,237,216,0.2);}
+  .lesson-icon{font-size:28px;margin-bottom:18px;display:block;}
+  .lesson-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--cream);margin-bottom:10px;line-height:1.2;}
+  .lesson-desc{font-family:'DM Serif Text',serif;font-size:14px;line-height:1.7;color:rgba(245,237,216,0.45);margin-bottom:24px;}
+  .lesson-meta{display:flex;gap:16px;align-items:center;}
+  .lesson-duration{font-size:11px;letter-spacing:0.1em;color:var(--muted);font-family:'Jost',sans-serif;}
+  .lesson-link{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);text-decoration:none;font-family:'Jost',sans-serif;margin-left:auto;display:flex;align-items:center;gap:8px;transition:gap 0.3s;}
+  .lesson-link:hover{gap:14px;}
+  .lesson-link::after{content:'→';}
+
+  /* KEYS SECTION */
+  .keys-section{background:var(--cream);padding:100px 10vw;}
+  .keys-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:60px;}
+  .keys-visual{position:relative;}
+  .keys-board{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;margin-bottom:24px;}
+  .key-tile{aspect-ratio:1;background:var(--espresso);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:12px;font-style:italic;color:rgba(245,237,216,0.5);transition:background 0.3s,color 0.3s;cursor:none;}
+  .key-tile:hover{background:var(--gold);color:var(--espresso);}
+  .key-tile.sharp{background:var(--dark-brown);color:rgba(245,237,216,0.3);}
+  .key-tile.sharp:hover{background:var(--burnt);color:var(--cream);}
+  .keys-note{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:rgba(26,15,10,0.5);text-align:center;}
+  .keys-content{}
+  .keys-title{font-family:'Playfair Display',serif;font-size:clamp(26px,2.8vw,38px);font-weight:700;color:var(--espresso);line-height:1.2;margin-bottom:20px;}
+  .keys-title em{font-style:italic;color:var(--sienna);}
+  .keys-body{font-family:'DM Serif Text',serif;font-size:17px;line-height:1.85;color:rgba(26,15,10,0.65);margin-bottom:20px;}
+  .keys-breakdown{margin-top:36px;display:flex;flex-direction:column;gap:14px;}
+  .kb-item{display:flex;align-items:center;gap:16px;}
+  .kb-bar{height:6px;background:linear-gradient(to right,var(--gold),var(--burnt));border-radius:0;}
+  .kb-label{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(26,15,10,0.55);font-family:'Jost',sans-serif;min-width:120px;}
+  .kb-count{font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:var(--gold);margin-left:auto;}
+
+  /* TESTIMONIAL */
+  .student-voices{background:var(--espresso);padding:100px 10vw;position:relative;overflow:hidden;}
+  .sv-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:64px;}
+  .sv-card{padding:52px 44px;background:rgba(255,255,255,0.03);border:1px solid rgba(201,151,58,0.06);}
+  .sv-card:first-child{background:rgba(201,151,58,0.08);border-color:rgba(201,151,58,0.15);}
+  .sv-stars{color:var(--gold);font-size:14px;letter-spacing:3px;margin-bottom:20px;}
+  .sv-mark{font-family:'Playfair Display',serif;font-size:56px;color:var(--gold);opacity:0.2;line-height:0.8;margin-bottom:16px;display:block;}
+  .sv-quote{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;font-weight:300;color:var(--cream);line-height:1.7;margin-bottom:28px;}
+  .sv-name{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-light);}
+  .sv-source{font-size:12px;color:var(--muted);margin-top:4px;font-family:'Jost',sans-serif;}
+  .sv-progress{display:flex;align-items:center;gap:12px;margin-top:20px;padding-top:20px;border-top:1px solid rgba(245,237,216,0.06);}
+  .sv-before,.sv-after{font-size:11px;font-family:'Jost',sans-serif;color:rgba(245,237,216,0.4);letter-spacing:0.08em;}
+  .sv-arrow{color:var(--gold);font-size:16px;}
+  .sv-after{color:var(--gold-light);}
+
+  /* GET STARTED CTA */
+  .get-started{background:var(--gold);padding:100px 10vw;display:grid;grid-template-columns:1fr auto;align-items:center;gap:60px;position:relative;overflow:hidden;}
+  .get-started::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(255,255,255,0.04) 40px,rgba(255,255,255,0.04) 41px);}
+  .gs-text{position:relative;}
+  .gs-title{font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,44px);font-weight:900;color:var(--espresso);line-height:1.1;}
+  .gs-title em{font-style:italic;}
+  .gs-sub{font-family:'DM Serif Text',serif;font-size:17px;color:rgba(26,15,10,0.6);margin-top:12px;line-height:1.7;}
+  .gs-buttons{display:flex;flex-direction:column;gap:12px;flex-shrink:0;position:relative;}
+  .btn-espresso{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;padding:18px 48px;background:var(--espresso);color:var(--cream);border:none;cursor:none;text-decoration:none;display:inline-block;text-align:center;transition:background 0.3s;}
+  .btn-espresso:hover{background:var(--dark-brown);}
+  .btn-outline-dark{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:400;padding:18px 48px;background:transparent;color:var(--espresso);border:1px solid rgba(26,15,10,0.3);cursor:none;text-decoration:none;display:inline-block;text-align:center;transition:border-color 0.3s;}
+  .btn-outline-dark:hover{border-color:var(--espresso);}
+
+  footer{background:var(--espresso);padding:80px 10vw 48px;}
+  .footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:60px;padding-bottom:64px;border-bottom:1px solid rgba(245,237,216,0.08);margin-bottom:40px;}
+  .footer-brand .nav-logo{font-size:24px;display:block;margin-bottom:16px;}
+  .footer-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(245,237,216,0.4);line-height:1.6;}
+  .footer-col-title{font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;font-family:'Jost',sans-serif;font-weight:500;}
+  .footer-links{list-style:none;display:flex;flex-direction:column;gap:14px;}
+  .footer-links a{font-family:'DM Serif Text',serif;font-size:15px;color:rgba(245,237,216,0.5);text-decoration:none;transition:color 0.3s;}
+  .footer-links a:hover{color:var(--cream);}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;}
+  .footer-copy{font-size:12px;color:rgba(245,237,216,0.25);font-family:'Jost',sans-serif;}
+  .social-links{display:flex;gap:24px;}
+  .social-links a{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,237,216,0.35);text-decoration:none;font-family:'Jost',sans-serif;transition:color 0.3s;}
+  .social-links a:hover{color:var(--gold);}
+
+  .reveal{opacity:0;transform:translateY(32px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .reveal-delay-1{transition-delay:0.12s;}.reveal-delay-2{transition-delay:0.24s;}.reveal-delay-3{transition-delay:0.36s;}
+  @keyframes fadeSlideUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+  .hero-content{animation:fadeSlideUp 1.2s cubic-bezier(0.16,1,0.3,1) both;}
+  .hero-right{animation:fadeSlideUp 1.2s 0.2s cubic-bezier(0.16,1,0.3,1) both;}
+
+  @media(max-width:1024px){
+    nav{padding:20px 32px;}.nav-links{display:none;}
+    .page-hero{grid-template-columns:1fr;}
+    .hero-right{display:none;}
+    .hero-content{padding:120px 6vw 80px;}
+    .philosophy-grid,.keys-grid{grid-template-columns:1fr;}
+    .lessons-grid{grid-template-columns:1fr;}
+    .sv-grid{grid-template-columns:1fr;}
+    .get-started{grid-template-columns:1fr;}
+    .curr-header{grid-template-columns:1fr;}
+    .footer-top{grid-template-columns:1fr 1fr;gap:40px;}
+  }
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<nav>
+  <a class="nav-logo" href="index.html"><span>Omega</span> Bone</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="lessons.html" class="active">Lessons</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="booking.html" class="nav-cta">Book Omega</a></li>
+  </ul>
+</nav>
+
+<section class="page-hero">
+  <div class="hero-bg"></div>
+  <span class="hero-deco-num">03</span>
+  <div class="hero-content">
+    <p class="page-eyebrow">Learn to Sing with Omega</p>
+    <h1 class="page-title">
+      Your Voice,
+      <em>Unleashed</em>
+    </h1>
+    <p class="page-subtitle">Free singing and music lessons designed to take you from wherever you are to wherever your voice can go. No experience required — just the desire to sing.</p>
+    <div class="hero-ctas">
+      <a href="#curriculum" class="btn-cream">Browse the Lessons</a>
+      <a href="#warmup" class="btn-ghost-cream">Start the Warmup</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat-card reveal">
+      <div class="hsc-num">48+</div>
+      <div class="hsc-label">Vocal Exercises</div>
+      <div class="hsc-desc">Every exercise available in all 12 keys</div>
+    </div>
+    <div class="hero-stat-card reveal reveal-delay-1">
+      <div class="hsc-num">10<span style="font-size:0.5em;color:var(--gold);font-style:italic;">min</span></div>
+      <div class="hsc-label">Daily Warmup</div>
+      <div class="hsc-desc">More effective than 2 hours once a week</div>
+    </div>
+    <div class="hero-stat-card reveal reveal-delay-2">
+      <div class="hsc-num">Free</div>
+      <div class="hsc-label">To Get Started</div>
+      <div class="hsc-desc">Every lesson available at no cost</div>
+    </div>
+  </div>
+  <svg style="position:absolute;bottom:0;left:0;right:0;width:100%;height:60px;opacity:0.1;" viewBox="0 0 1440 60" preserveAspectRatio="none" fill="none">
+    <path d="M0,30 Q120,5 240,30 Q360,55 480,30 Q600,5 720,30 Q840,55 960,30 Q1080,5 1200,30 Q1320,55 1440,30" stroke="rgba(245,237,216,1)" stroke-width="1.5"/>
+  </svg>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy">
+  <div class="philosophy-grid">
+    <div class="philosophy-text">
+      <p class="section-eyebrow reveal">The Method</p>
+      <h2 class="section-title reveal">Omega's <em>Teaching Philosophy</em></h2>
+      <p class="phil-body reveal">Omega's approach to vocal training is built on a simple truth: consistency beats intensity every time. A 10-minute daily warmup will transform your voice faster than sporadic marathon sessions.</p>
+      <p class="phil-body reveal">Her method builds from the ground up — starting with breath, then resonance, then pitch, then song. Each element is introduced with patience and reinforced with structured repetition.</p>
+      <div class="phil-principles">
+        <div class="principle reveal">
+          <span class="p-icon">🫁</span>
+          <div><p class="p-title">Breath First</p><p class="p-desc">Every great voice is built on breath support. Omega teaches breath control before anything else.</p></div>
+        </div>
+        <div class="principle reveal reveal-delay-1">
+          <span class="p-icon">📅</span>
+          <div><p class="p-title">Daily Over Occasional</p><p class="p-desc">Small daily practice compounds dramatically. This is the single most important habit Omega instills.</p></div>
+        </div>
+        <div class="principle reveal reveal-delay-1">
+          <span class="p-icon">🎯</span>
+          <div><p class="p-title">Range, Not Force</p><p class="p-desc">Strain is the enemy of a great voice. Omega teaches expansion through relaxation and correct technique.</p></div>
+        </div>
+        <div class="principle reveal reveal-delay-2">
+          <span class="p-icon">❤️</span>
+          <div><p class="p-title">Emotion Into Technique</p><p class="p-desc">Technical mastery is the vehicle; emotional truth is the destination. Omega never loses sight of either.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-1" id="warmup">
+      <div class="warmup-visual">
+        <p class="wv-label">The 10-Minute Warmup</p>
+        <h3 class="wv-title">Start Here</h3>
+        <p class="wv-sub">The routine that builds everything</p>
+        <div class="wv-steps">
+          <div class="wv-step"><span class="wv-step-num">1.</span><span class="wv-step-text">Lip buzzing — activate the breath stream (2 min)</span></div>
+          <div class="wv-step"><span class="wv-step-num">2.</span><span class="wv-step-text">He-E / Ah-Ah sequence — mouth space & resonance (2 min)</span></div>
+          <div class="wv-step"><span class="wv-step-num">3.</span><span class="wv-step-text">Key-Kay-Key — upper register clarity (2 min)</span></div>
+          <div class="wv-step"><span class="wv-step-num">4.</span><span class="wv-step-text">OohWah-ah — lower range warmth (2 min)</span></div>
+          <div class="wv-step"><span class="wv-step-num">5.</span><span class="wv-step-text">Koo-koo high notes — bright upper range (2 min)</span></div>
+        </div>
+        <span class="wv-time">10</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section class="curriculum" id="curriculum">
+  <div class="curr-header">
+    <div>
+      <p class="section-eyebrow" style="color:rgba(201,151,58,0.7);" class="reveal">The Curriculum</p>
+      <h2 class="curr-title reveal">Lessons for Every <em>Level & Goal</em></h2>
+    </div>
+    <div class="curr-filter">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Beginner</button>
+      <button class="filter-btn">Intermediate</button>
+      <button class="filter-btn">Advanced</button>
+    </div>
+  </div>
+  <div class="lessons-grid">
+    <div class="lesson-card reveal">
+      <span class="lesson-level">Beginner</span>
+      <span class="lesson-icon">🎤</span>
+      <h3 class="lesson-name">Introduction to Your Voice</h3>
+      <p class="lesson-desc">Discover your natural range, understand vocal anatomy, and learn why breath is the foundation of everything.</p>
+      <div class="lesson-meta"><span class="lesson-duration">15 min</span><a href="#" class="lesson-link">Begin</a></div>
+    </div>
+    <div class="lesson-card reveal reveal-delay-1">
+      <span class="lesson-level">Beginner</span>
+      <span class="lesson-icon">💨</span>
+      <h3 class="lesson-name">Breath Control Fundamentals</h3>
+      <p class="lesson-desc">Master the diaphragmatic breath support that separates trained singers from untrained ones. The single most important lesson.</p>
+      <div class="lesson-meta"><span class="lesson-duration">20 min</span><a href="#" class="lesson-link">Begin</a></div>
+    </div>
+    <div class="lesson-card reveal reveal-delay-2">
+      <span class="lesson-level">Beginner</span>
+      <span class="lesson-icon">🔊</span>
+      <h3 class="lesson-name">The 10-Minute Daily Warmup</h3>
+      <p class="lesson-desc">Omega's signature routine. Do this every day and your voice will transform within weeks. Available in all 12 keys.</p>
+      <div class="lesson-meta"><span class="lesson-duration">10 min</span><a href="#" class="lesson-link">Start Routine</a></div>
+    </div>
+    <div class="lesson-card reveal">
+      <span class="lesson-level intermediate">Intermediate</span>
+      <span class="lesson-icon">📈</span>
+      <h3 class="lesson-name">Range Expansion Techniques</h3>
+      <p class="lesson-desc">Safely extend your high notes and deepen your lows through targeted exercises across all 12 keys. No strain, only growth.</p>
+      <div class="lesson-meta"><span class="lesson-duration">25 min</span><a href="#" class="lesson-link">Begin</a></div>
+    </div>
+    <div class="lesson-card reveal reveal-delay-1">
+      <span class="lesson-level intermediate">Intermediate</span>
+      <span class="lesson-icon">🎭</span>
+      <h3 class="lesson-name">Emotional Expression in Song</h3>
+      <p class="lesson-desc">Technical excellence in service of emotional truth. How to connect authentically with lyrics and move your audience.</p>
+      <div class="lesson-meta"><span class="lesson-duration">30 min</span><a href="#" class="lesson-link">Begin</a></div>
+    </div>
+    <div class="lesson-card reveal reveal-delay-2">
+      <span class="lesson-level intermediate">Intermediate</span>
+      <span class="lesson-icon">🎵</span>
+      <h3 class="lesson-name">Stylistic Deep Dives: Jazz & Soul</h3>
+      <p class="lesson-desc">Genre-specific techniques for Jazz improvisation and Soul expressiveness. The secrets that define these great vocal traditions.</p>
+      <div class="lesson-meta"><span class="lesson-duration">35 min</span><a href="#" class="lesson-link">Begin</a></div>
+    </div>
+    <div class="lesson-card reveal">
+      <span class="lesson-level advanced">Advanced</span>
+      <span class="lesson-icon">🏆</span>
+      <h3 class="lesson-name">Performance Preparation</h3>
+      <p class="lesson-desc">Everything that separates a rehearsal singer from a stage performer. Presence, nerves, audience connection, and commanding a room.</p>
+      <div class="lesson-meta"><span class="lesson-duration">40 min</span><a href="#" class="lesson-link">Begin</a></div>
+    </div>
+    <div class="lesson-card reveal reveal-delay-1">
+      <span class="lesson-level advanced">Advanced</span>
+      <span class="lesson-icon">🎼</span>
+      <h3 class="lesson-name">Classical Technique for All Genres</h3>
+      <p class="lesson-desc">How classical vocal training makes every other genre better. The technique that underpins Omega's own extraordinary range.</p>
+      <div class="lesson-meta"><span class="lesson-duration">45 min</span><a href="#" class="lesson-link">Begin</a></div>
+    </div>
+    <div class="lesson-card reveal reveal-delay-2">
+      <span class="lesson-level advanced">Advanced</span>
+      <span class="lesson-icon">⭐</span>
+      <h3 class="lesson-name">Professional Voice Maintenance</h3>
+      <p class="lesson-desc">How working vocalists care for their instrument. The routines, habits, and practices that keep a professional voice performing at its peak.</p>
+      <div class="lesson-meta"><span class="lesson-duration">30 min</span><a href="#" class="lesson-link">Begin</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- KEYS -->
+<section class="keys-section">
+  <p class="section-eyebrow reveal">Exercise Library</p>
+  <h2 class="section-title reveal">48 Exercises in <em>All 12 Keys</em></h2>
+  <div class="keys-grid">
+    <div class="keys-visual reveal">
+      <div class="keys-board">
+        <div class="key-tile">C</div><div class="key-tile sharp">C#</div><div class="key-tile">D</div><div class="key-tile sharp">D#</div>
+        <div class="key-tile">E</div><div class="key-tile">F</div><div class="key-tile sharp">F#</div><div class="key-tile">G</div>
+        <div class="key-tile sharp">G#</div><div class="key-tile">A</div><div class="key-tile sharp">A#</div><div class="key-tile">B</div>
+      </div>
+      <p class="keys-note">Hover any key — your exercises are waiting</p>
+      <div class="keys-breakdown" style="margin-top:36px;">
+        <div class="kb-item"><span class="kb-label">Breath & Buzz</span><div class="kb-bar" style="width:80%;flex:1;"></div><span class="kb-count">8 ex.</span></div>
+        <div class="kb-item"><span class="kb-label">Resonance</span><div class="kb-bar" style="width:60%;flex:1;background:linear-gradient(to right,var(--sienna),var(--burnt));"></div><span class="kb-count">12 ex.</span></div>
+        <div class="kb-item"><span class="kb-label">Upper Range</span><div class="kb-bar" style="width:50%;flex:1;background:linear-gradient(to right,var(--burnt),var(--gold));"></div><span class="kb-count">14 ex.</span></div>
+        <div class="kb-item"><span class="kb-label">Lower Range</span><div class="kb-bar" style="width:35%;flex:1;background:linear-gradient(to right,var(--dark-brown),var(--sienna));"></div><span class="kb-count">10 ex.</span></div>
+        <div class="kb-item"><span class="kb-label">Agility</span><div class="kb-bar" style="width:20%;flex:1;background:linear-gradient(to right,var(--gold-light),var(--gold));"></div><span class="kb-count">4 ex.</span></div>
+      </div>
+    </div>
+    <div class="keys-content reveal reveal-delay-1">
+      <h3 class="keys-title">Every Exercise in <em>Your Range</em></h3>
+      <p class="keys-body">The 48-exercise library lets you customise your practice entirely. Load an exercise in the key that matches your range on any given day, and build up or down as your voice develops.</p>
+      <p class="keys-body">This is the same approach Omega uses with her professional students — meeting the voice where it is, then gently expanding its edges.</p>
+      <div style="margin-top:40px;display:flex;flex-direction:column;gap:12px;">
+        <div style="display:flex;align-items:baseline;gap:16px;padding-bottom:16px;border-bottom:1px solid rgba(26,15,10,0.08);">
+          <span style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--gold);line-height:1;">48</span>
+          <span style="font-family:'DM Serif Text',serif;font-size:15px;color:rgba(26,15,10,0.6);">individual vocal exercises, available as MP3 downloads</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:16px;padding-bottom:16px;border-bottom:1px solid rgba(26,15,10,0.08);">
+          <span style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--sienna);line-height:1;">12</span>
+          <span style="font-family:'DM Serif Text',serif;font-size:15px;color:rgba(26,15,10,0.6);">keys — every exercise available across all keys</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:16px;">
+          <span style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--burnt);line-height:1;">∞</span>
+          <span style="font-family:'DM Serif Text',serif;font-size:15px;color:rgba(26,15,10,0.6);">combinations to match any range, at any stage</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STUDENT VOICES -->
+<section class="student-voices">
+  <p class="section-eyebrow" style="color:rgba(201,151,58,0.7);" class="reveal">Student Stories</p>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,44px);font-weight:700;color:var(--cream);line-height:1.15;margin-top:12px;" class="reveal">Voices <em style="font-style:italic;color:var(--gold-light);">Transformed</em></h2>
+  <div class="sv-grid">
+    <div class="sv-card reveal">
+      <div class="sv-stars">★★★★★</div>
+      <span class="sv-mark">"</span>
+      <p class="sv-quote">I went from barely holding a note to performing in front of 200 people in four months. Omega's method is unlike anything else — it's methodical, warm, and genuinely life-changing.</p>
+      <p class="sv-name">James T.</p>
+      <p class="sv-source">Student, Learn to Sing Program</p>
+      <div class="sv-progress"><span class="sv-before">Couldn't hold a note</span><span class="sv-arrow">→</span><span class="sv-after">Performed for 200 people</span></div>
+    </div>
+    <div class="sv-card reveal reveal-delay-1">
+      <div class="sv-stars">★★★★★</div>
+      <span class="sv-mark">"</span>
+      <p class="sv-quote">The 10-minute warmup changed my whole relationship with my voice. I do it every morning and my range has expanded by nearly an octave in six months. I can't believe it was free.</p>
+      <p class="sv-name">Maria C.</p>
+      <p class="sv-source">Amateur Singer, Los Angeles</p>
+      <div class="sv-progress"><span class="sv-before">Limited range</span><span class="sv-arrow">→</span><span class="sv-after">+1 octave in 6 months</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GET STARTED CTA -->
+<section class="get-started">
+  <div class="gs-text">
+    <h2 class="gs-title">Ready to find out what <em>your voice can do?</em></h2>
+    <p class="gs-sub">Start with the 10-minute warmup today. Everything else follows from there.</p>
+  </div>
+  <div class="gs-buttons">
+    <a href="#curriculum" class="btn-espresso">Browse All Lessons</a>
+    <a href="contact.html" class="btn-outline-dark">Work with Omega Directly</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="nav-logo" href="index.html"><span>Omega</span> Bone</a>
+      <p class="footer-tagline">Dazzling performances.<br>Transformative vocal coaching.<br>Los Angeles & Worldwide.</p>
+    </div>
+    <div><p class="footer-col-title">Perform</p><ul class="footer-links"><li><a href="booking.html">Book a Show</a></li><li><a href="booking.html">Private Events</a></li><li><a href="about.html">Jazz & Soul</a></li></ul></div>
+    <div><p class="footer-col-title">Learn</p><ul class="footer-links"><li><a href="lessons.html">Free Lessons</a></li><li><a href="lessons.html">Vocal Warmups</a></li><li><a href="lessons.html">Exercise Library</a></li></ul></div>
+    <div><p class="footer-col-title">Connect</p><ul class="footer-links"><li><a href="#">Instagram</a></li><li><a href="#">YouTube</a></li><li><a href="contact.html">Email Omega</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Omega Bone. All rights reserved.</p>
+    <div class="social-links"><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Facebook</a></div>
+  </div>
+</footer>
+
+<script>
+  const cursor=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+  function animateRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animateRing);}
+  animateRing();
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+  const reveals=document.querySelectorAll('.reveal');
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+  reveals.forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
